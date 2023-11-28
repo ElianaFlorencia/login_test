@@ -32,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
 
                     @Override
-                    public void onComplete(@NonNull Ta sk<AuthResult> task) {
+                    public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()) {
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class );
                                     startActivity (intent);

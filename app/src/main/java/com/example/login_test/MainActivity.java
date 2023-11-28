@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -38,5 +39,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    //Para cerrar la sesion
+
+    public void logout (View v){
+        mAuth.signOut();
+        Intent intent = new Intent (getApplicationContext(), LoginActivity.class);
+        startActivity (intent);
+        Log.i ("firebase", "volví a la pantalla del login");
+    }
 
 }
