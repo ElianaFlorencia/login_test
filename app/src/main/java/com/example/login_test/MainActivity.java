@@ -2,6 +2,7 @@ package com.example.login_test;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -29,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
             Log.i ("firebase", "hay usuario");
 
         } else{
+            Intent intent = new Intent (getApplicationContext(), LoginActivity.class);
+            startActivity (intent);
             Log.i ("firebase", "deberia logearme porque no hay usuario");
 
         }
