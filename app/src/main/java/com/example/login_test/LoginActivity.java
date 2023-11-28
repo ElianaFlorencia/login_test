@@ -25,15 +25,17 @@ public class LoginActivity extends AppCompatActivity {
 
         // lo que hace esto es: si apretas el login, va a la main pero cuando llega como no tiene el
         //usuario va devuelta al login
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(intent);
+        // Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        //startActivity(intent);
 
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
 
                     @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
+                    public void onComplete(@NonNull Ta sk<AuthResult> task) {
                         if(task.isSuccessful()) {
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class );
+                                    startActivity (intent);
 
                         } else {
                             Toast.makeText(LoginActivity.this, " Falló el login ",
