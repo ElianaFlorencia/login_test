@@ -9,23 +9,22 @@
     tools:context=".LoginActivity">
 
 
-
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#9C27B0">
+        android:layout_height="113dp"
+        android:background="#9C27B0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <EditText
             android:id="@+id/emailBox"
-            android:layout_width="363dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="273dp"
-            android:ems="10"
-            android:inputType="textEmailAddress"
-            android:hint="Email:"
             android:background="#FF5733"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:ems="10"
+            android:hint="Email:"
+            android:inputType="textEmailAddress"
             app:layout_constraintTop_toTopOf="parent" />
 
     </com.google.android.material.textfield.TextInputLayout>
