@@ -28,8 +28,12 @@ public class MainActivity extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
-            Log.i ("firebase", "hay usuario");
 
+            if (currentUser.isEmailVerified()) {
+                Log.i("firebase", "Hay usuario");
+            } else {
+                currentUser.sendEmailVerification();
+            }
         } else{
             Intent intent = new Intent (getApplicationContext(), LoginActivity.class);
             startActivity (intent);
