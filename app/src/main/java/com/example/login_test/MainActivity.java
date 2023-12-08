@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.drm.DrmStore;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
     private FirebaseFirestore db;
+
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +58,13 @@ public class MainActivity extends AppCompatActivity {
                                 for (QueryDocumentSnapshot documento: task.getResult()){
                                     String id = documento.getId();
                                     Map< String, Object> data = documento.getData();
-                                    Log.i ("firebase firestore", " user id: " + id + "data: " + data.toString());
+
+                                    user = documento.toObject(User.class);
+
+                                    //Log.i ("firebase firestore", " user id: " + id + "data: " + data.toString());
+                                    Log.i ("firebase firestore", "Apellido: " + user.getLastname());
+                                    Log.i ("firebase firestore", "Nombre: " + user.getName());
+                                    Log.i ("firebase firestore", "Cuenta Verificada: " + user.isVerified());
 
 
 
@@ -82,6 +92,8 @@ public class MainActivity extends AppCompatActivity {
                                                     Log.e("firebase firestore", "Error al actualizar el usuario: " + id, e);
                                                 }
                                             });
+
+
 
                                 }
                             }
