@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.View;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -16,6 +18,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -49,8 +53,35 @@ public class MainActivity extends AppCompatActivity {
                             if (task.isSuccessful()){
                                 for (QueryDocumentSnapshot documento: task.getResult()){
                                     String id = documento.getId();
-                                    Object data = documento.getData();
+                                    Map< String, Object> data = documento.getData();
                                     Log.i ("firebase firestore", " user id: " + id + "data: " + data.toString());
+
+
+
+                                   String currentLastName = (String) data.get ("lastname");
+                                   String updatedLastName = "";
+
+                                   if ("messi". equalsIgnoreCase(currentLastName)){
+                                       updatedLastName = "Messi";
+                                   } else if ("lopez". equalsIgnoreCase(currentLastName)){
+                                       updatedLastName = "Lopez";
+                                   }
+
+                                    db.collection("users")
+                                            .document(id)
+                                            .update ("lastname", updatedLastName)
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void aVoid) {
+                                                    Log.i("firebase firestore", "Los datos del usuario de acutalizaron con éxito: " + id);
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Log.e("firebase firestore", "Error al actualizar el usuario: " + id, e);
+                                                }
+                                            });
 
                                 }
                             }
